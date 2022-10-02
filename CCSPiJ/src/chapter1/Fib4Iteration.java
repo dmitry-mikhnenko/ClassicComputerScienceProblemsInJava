@@ -1,4 +1,4 @@
-// Fib2.java
+// Fib4Iteration.java
 // From Classic Computer Science Problems in Java Chapter 1
 // Copyright 2020 David Kopec
 //
@@ -16,16 +16,24 @@
 
 package chapter1;
 
-public class Fib2 {
-	private static int fib2(int n) {
-		if (n < 2) {
-			return n;
+import java.util.Locale;
+import utils.TimeWatch;
+
+public class Fib4Iteration {
+
+	private static long fib4(int n) {
+		var last = 0L; // fib(0)
+		var next = 1L; // fib(1)
+		for (var i = 0; i < n; i++) {
+			var oldLast = last;
+			last = next;
+			next = oldLast + next;
 		}
-		return fib2(n - 1) + fib2(n - 2);
+		return last;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(fib2(5));
-		System.out.println(fib2(10));
+		TimeWatch watch = TimeWatch.start();
+		System.out.printf("result: %d, time: %s%n", fib4(100), watch.format());
 	}
 }

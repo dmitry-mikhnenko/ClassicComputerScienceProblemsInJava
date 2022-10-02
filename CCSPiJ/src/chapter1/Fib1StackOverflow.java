@@ -1,4 +1,4 @@
-// Fib1.java
+// Fib1StackOverflow.java
 // From Classic Computer Science Problems in Java Chapter 1
 // Copyright 2020 David Kopec
 //
@@ -16,7 +16,7 @@
 
 package chapter1;
 
-public class Fib1 {
+public class Fib1StackOverflow {
 
 	// This method will cause a java.lang.StackOverflowError
 	private static int fib1(int n) {

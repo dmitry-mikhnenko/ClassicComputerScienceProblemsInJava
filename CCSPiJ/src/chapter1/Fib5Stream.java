@@ -1,4 +1,4 @@
-// Fib5.java
+// Fib5Stream.java
 // From Classic Computer Science Problems in Java Chapter 1
 // Copyright 2020 David Kopec
 //
@@ -16,22 +16,29 @@
 
 package chapter1;
 
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import utils.TimeWatch;
 
-public class Fib5 {
-	private int last = 0, next = 1; // fib(0), fib(1)
+public class Fib5Stream {
 
-	public IntStream stream() {
-		return IntStream.generate(() -> {
-			int oldLast = last;
-			last = next;
-			next = oldLast + next;
-			return oldLast;
-		});
-	}
+  private long last = 0;
+  private long next = 1; // fib(0), fib(1)
 
-	public static void main(String[] args) {
-		Fib5 fib5 = new Fib5();
-		fib5.stream().limit(41).forEachOrdered(System.out::println);
-	}
+  public LongStream stream() {
+    return LongStream.generate(this::fib5);
+  }
+
+  private long fib5() {
+    var oldLast = last;
+    last = next;
+    next = oldLast + next;
+    return oldLast;
+  }
+
+  public static void main(String[] args) {
+    var watch = TimeWatch.start();
+    Fib5Stream fib5Stream = new Fib5Stream();
+    fib5Stream.stream().limit(50).forEachOrdered(System.out::println);
+    System.out.println(watch.format());
+  }
 }

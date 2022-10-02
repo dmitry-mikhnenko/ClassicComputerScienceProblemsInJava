@@ -1,4 +1,4 @@
-// Fib4.java
+// Fib2Classic.java
 // From Classic Computer Science Problems in Java Chapter 1
 // Copyright 2020 David Kopec
 //
@@ -16,20 +16,19 @@
 
 package chapter1;
 
-public class Fib4 {
+import utils.TimeWatch;
 
-	private static int fib4(int n) {
-		int last = 0, next = 1; // fib(0), fib(1)
-		for (int i = 0; i < n; i++) {
-			int oldLast = last;
-			last = next;
-			next = oldLast + next;
-		}
-		return last;
-	}
+public class Fib2Classic {
 
-	public static void main(String[] args) {
-		System.out.println(fib4(5));
-		System.out.println(fib4(40));
-	}
+  private static int fib2(int n) {
+    if (n < 2) {
+      return n;
+    }
+    return fib2(n - 1) + fib2(n - 2);
+  }
+
+  public static void main(String[] args) {
+    TimeWatch watch = TimeWatch.start();
+    System.out.printf("result: %d, time: %ss%n", fib2(45), watch.format());
+  }
 }
